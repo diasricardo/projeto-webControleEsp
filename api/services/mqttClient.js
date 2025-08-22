@@ -10,6 +10,8 @@ const MQTT_PASSWORD = 'TesteSenai1';
 const TOPICO_STATUS = 'aulaLed/33/status';
 const TOPICO_COMANDO_LED = 'aulaLed/33/estadoLed';
 const STATUS_BOIA = "projeto/33/statusBoia";
+const UMIDADE = "projeto/33/umidade";
+const TEMPERATURA = "projeto/33/temperatura";
 
 let mqttClient;
 let subscriptions = {};
@@ -47,6 +49,18 @@ function conectarMqtt(){
                 console.log(`Inscrito no tópico ${STATUS_BOIA}`);
             }
         })
+         mqttClient.subscribe(UMIDADE, (err) =>{
+            if(!err)
+            {
+                console.log(`Inscrito no tópico ${UMIDADE}`);
+            }
+        })
+         mqttClient.subscribe(TEMPERATURA, (err) =>{
+            if(!err)
+            {
+                console.log(`Inscrito no tópico ${TEMPERATURA}`);
+            }
+        })
     })
     
     mqttClient.on('message', (topic, message) =>{
@@ -77,4 +91,4 @@ function publicar(topic, message){
 
 conectarMqtt();
 
-export{publicar,onMessage, TOPICO_STATUS, TOPICO_COMANDO_LED, STATUS_BOIA}
+export{publicar,onMessage, TOPICO_STATUS, TOPICO_COMANDO_LED, STATUS_BOIA, UMIDADE, TEMPERATURA}
